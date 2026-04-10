@@ -1,0 +1,30 @@
+name: ai-data-analyst-env
+
+description: >
+  Real-world AI Data Analyst environment with data cleaning,
+  anomaly detection, and insight generation.
+
+observation_space:
+  summary: string
+  missing_values: int
+  duplicates: int
+  anomaly_count: int
+  step_count: int
+
+action_space:
+  action_type: string
+  payload: dict
+
+reward:
+  type: float
+  range: [-1, 1]
+
+tasks:
+  - name: data_cleaning
+    difficulty: easy
+
+  - name: anomaly_detection
+    difficulty: medium
+
+  - name: insight_generation
+    difficulty: hard
