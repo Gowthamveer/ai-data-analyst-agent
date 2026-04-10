@@ -1,1 +1,3 @@
-version=1
+[[package]]
+name = "ai-data-analyst-agent"
+version = "0.1.0"
