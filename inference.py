@@ -1,57 +1,70 @@
-import os
-from openai import OpenAI
-from env.environment import DataEnv, Action
+from fastapi import FastAPI
+import pandas as pd
 
-# ✅ Required environment variables
-API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
-MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4.1-mini")
-HF_TOKEN = os.getenv("HF_TOKEN")
+app = FastAPI()
 
-if HF_TOKEN is None:
-    raise ValueError("HF_TOKEN environment variable is required")
+# Global state
+data = None
+step_count = 0
 
-# OpenAI client
-client = OpenAI(
-    base_url=API_BASE_URL,
-    api_key=HF_TOKEN
-)
+# ---------------- RESET ----------------
+@app.post("/reset")
+def reset():
+    global data, step_count
 
-# Initialize environment
-env = DataEnv()
-obs = env.reset()
+    data = pd.read_csv("data/small_data.csv")
+    step_count = 0
 
-task_name = "data_analysis"
-benchmark = "openenv"
+    return {
+        "message": "Environment reset successful",
+        "rows": len(data)
+    }
 
-print(f"[START] task={task_name} env={benchmark} model={MODEL_NAME}")
+# ---------------- STEP ----------------
+@app.post("/step")
+def step(action: dict):
+    global data, step_count
 
-total_rewards = []
-success = False
+    step_count += 1
+    action_type = action.get("action", "")
 
-actions = [
-    "clean_missing",
-    "remove_duplicates",
-    "detect_anomaly",
-    "generate_insight"
-]
+    reward = 0
 
-for step, action_name in enumerate(actions, start=1):
-    error = None
+    if action_type == "clean_missing":
+        before = data.isnull().sum().sum()
+        data = data.fillna(method="ffill")
+        after = data.isnull().sum().sum()
+        reward = (before - after) * 0.1
 
-    try:
-        action = Action(action_type=action_name, payload={})
-        obs, reward, done, info = env.step(action)
+    elif action_type == "remove_duplicates":
+        before = data.duplicated().sum()
+        data = data.drop_duplicates()
+        after = data.duplicated().sum()
+        reward = (before - after) * 0.15
 
-        total_rewards.append(f"{reward:.2f}")
+    elif action_type == "detect_anomaly":
+        numeric_cols = data.select_dtypes(include=["number"])
+        z = (numeric_cols - numeric_cols.mean()) / numeric_cols.std()
+        anomalies = (abs(z) > 3).sum().sum()
+        data["anomaly"] = (abs(z) > 3).any(axis=1)
+        reward = min(anomalies * 0.0001, 0.5)
 
-        print(f"[STEP] step={step} action={action_name} reward={reward:.2f} done={str(done).lower()} error=null")
+    elif action_type == "generate_insight":
+        reward = 0.8
 
-        if done:
-            success = True
-            break
+    else:
+        reward = -0.1
 
-    except Exception as e:
-        error = str(e)
-        print(f"[STEP] step={step} action={action_name} reward=0.00 done=false error={error}")
+    done = step_count >= 4
 
-print(f"[END] success={str(success).lower()} steps={step} rewards={','.join(total_rewards)}")
+    return {
+        "step": step_count,
+        "action": action_type,
+        "reward": float(reward),
+        "done": done
+    }
+
+# ---------------- STATUS ----------------
+@app.get("/")
+def home():
+    return {"message": "AI Data Analyst Agent Running"}
