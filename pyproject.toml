@@ -1,13 +1,16 @@
 [project]
 name = "ai-data-analyst-agent"
 version = "0.1.0"
-description = "AI Data Analyst Agent for OpenEnv"
-authors = [{name = "Your Name"}]
+description = "AI Data Analyst Agent"
 dependencies = [
     "fastapi",
     "uvicorn",
     "pandas",
     "numpy",
     "pydantic",
-    "scikit-learn"
+    "scikit-learn",
+    "openenv-core>=0.2.0"
 ]
+
+[project.scripts]
+server = "inference:app"
