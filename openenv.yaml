@@ -1,6 +1,5 @@
 name: ai-data-analyst-env
-
-entrypoint: server.app:main   # 🔥 MUST BE HERE (TOP or bottom both fine)
+entrypoint: inference:main
 
 description: >
   Real-world AI Data Analyst environment with data cleaning,
