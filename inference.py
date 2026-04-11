@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
 
-def create_app():
+def main():
     app = FastAPI()
 
     @app.post("/reset")
