@@ -7,4 +7,8 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 7860
-CMD ["uvicorn", "inference:app", "--host", "0.0.0.0", "--port", "7860"]
+EXPOSE 8501
+
+RUN chmod +x run.sh
+
+CMD ["./run.sh"]

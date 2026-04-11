@@ -1,53 +1,47 @@
 # 🧠 AI Data Analyst Agent (OpenEnv)
 
 ## 🚀 Overview
-This project implements an AI Data Analyst Agent that performs real-world data analysis tasks using a step-based environment.
+This project simulates a real-world AI data analyst workflow using an interactive environment.
 
-The agent can:
-- Clean data
-- Detect anomalies
-- Generate insights
-
-It follows a reward-driven approach to evaluate decision-making.
+The agent performs:
+- Data cleaning
+- Anomaly detection
+- Insight generation
 
 ---
 
 ## 🎯 Features
-- 📊 Real-world dataset (NYC Taxi data - sampled)
-- 🧹 Data cleaning (missing values, duplicates)
-- 🚨 Anomaly detection
-- 💡 Insight generation
-- 🧠 Reward-based agent system
-- 🌐 Interactive Streamlit dashboard
-- 🐳 Docker-based deployment
+- Real dataset (NYC Taxi)
+- Step-based environment (OpenEnv style)
+- Reward-driven agent system
+- Streamlit dashboard with visualizations
+- Anomaly detection using statistical methods
 
 ---
 
 ## ⚙️ Tasks
 
 ### 🟢 Task 1: Data Cleaning
-- Remove missing values
-- Remove duplicates
+Remove missing values and duplicates
 
 ### 🟡 Task 2: Anomaly Detection
-- Identify unusual fare patterns
+Identify outliers in fare data
 
 ### 🔴 Task 3: Insight Generation
-- Generate meaningful business insights
+Generate meaningful business insights
 
 ---
 
 ## 🏆 Reward Design
-- Positive reward for cleaning data
-- Reward for detecting anomalies
-- Penalty for redundant actions
-- Bonus for completing task
+- Rewards for data cleaning improvements
+- Rewards for anomaly detection
+- Penalties for redundant actions
+- Final reward for completing task
 
 ---
 
 ## 📊 Dataset
-- NYC Taxi dataset (sampled for performance)
-- Located in: `data/small_data.csv`
+NYC Taxi dataset (subset used for efficiency)
 
 ---
 
