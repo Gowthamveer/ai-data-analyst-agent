@@ -1,7 +1,14 @@
 from fastapi import FastAPI
 import pandas as pd
 
-app = FastAPI()
+def create_app():
+    app = FastAPI()
+
+    @app.post("/reset")
+    def reset():
+        return {"status": "ok"}
+
+    return app
 
 # Global state
 data = None
