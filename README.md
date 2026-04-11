@@ -1,3 +1,12 @@
+---
+title: AI Data Analyst Agent
+emoji: 🧠
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+---
+
 # 🧠 AI Data Analyst Agent (OpenEnv)
 
 ## 🚀 Overview
@@ -50,3 +59,4 @@ NYC Taxi dataset (subset used for efficiency)
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
+```

@@ -6,9 +6,9 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 7860
-EXPOSE 8501
+# Fix line endings for run.sh (Windows CRLF -> Linux LF)
+RUN sed -i 's/\r$//' run.sh && chmod +x run.sh
 
-RUN chmod +x run.sh
+EXPOSE 7860
 
 CMD ["./run.sh"]

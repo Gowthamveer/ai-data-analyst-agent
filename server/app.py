@@ -12,6 +12,7 @@ env = DataEnv()
 def health_check():
     return {"status": "ok"}
 
+@app.get("/reset")
 @app.post("/reset")
 def reset():
     obs = env.reset()
@@ -24,6 +25,5 @@ def step(action: Action):
 
 @app.get("/state")
 def state():
-    # Return serializable state
     df_state = env.state()
     return df_state.to_dict(orient="records")
