@@ -1,7 +1,6 @@
 [project]
 name = "ai-data-analyst-agent"
 version = "0.1.0"
-description = "AI Data Analyst Agent"
 
 dependencies = [
     "fastapi",
@@ -14,7 +13,4 @@ dependencies = [
 ]
 
 [project.scripts]
-server = "server.app:main"
-
-[tool.openenv]
-entrypoint = "server.app:main"
+server = "inference:main"
