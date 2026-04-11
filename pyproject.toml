@@ -6,13 +6,18 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.135.1",
-    "httpx==0.27.0",
-    "matplotlib==3.9.0",
-    "numpy==1.26.4",
-    "openai==1.40.6",
-    "pandas==2.2.2",
-    "pydantic==2.7.4",
-    "scikit-learn==1.5.1",
-    "streamlit==1.36.0",
+    "httpx>=0.27.0",
+    "matplotlib>=3.9.0",
+    "numpy>=1.26.4",
+    "openai>=1.40.6",
+    "pandas>=2.2.2",
+    "pydantic>=2.5.0",
+    "scikit-learn>=1.5.1",
+    "streamlit>=1.36.0",
     "uvicorn>=0.44.0",
+    "openenv-core>=0.2.0",
+    "openenv>=0.1.13",
 ]
+
+[project.scripts]
+server = "server.app:main"
