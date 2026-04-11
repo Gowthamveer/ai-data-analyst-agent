@@ -1,3 +1,4 @@
-from inference import app
+from inference import create_app
+
 def main():
-  return app
+    return create_app()
