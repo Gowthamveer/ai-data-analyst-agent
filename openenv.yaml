@@ -1,5 +1,7 @@
 name: ai-data-analyst-env
 
+entrypoint: server.app:main   # 🔥 MUST BE HERE (TOP or bottom both fine)
+
 description: >
   Real-world AI Data Analyst environment with data cleaning,
   anomaly detection, and insight generation.
@@ -22,11 +24,7 @@ reward:
 tasks:
   - name: data_cleaning
     difficulty: easy
-
   - name: anomaly_detection
     difficulty: medium
-
   - name: insight_generation
     difficulty: hard
-
-entrypoint: server.app:main   # ✅ ADD THIS LINE
