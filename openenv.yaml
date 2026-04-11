@@ -28,3 +28,5 @@ tasks:
 
   - name: insight_generation
     difficulty: hard
+
+entrypoint: server.app:main   # ✅ ADD THIS LINE
