@@ -1,62 +1,65 @@
 ---
 title: AI Data Analyst Agent
-emoji: 🧠
+emoji: 📊
 colorFrom: blue
-colorTo: green
+colorTo: indigo
 sdk: docker
 app_port: 7860
 ---
 
-# 🧠 AI Data Analyst Agent (OpenEnv)
+# AI Data Analyst Agent (OpenEnv RL Challenge)
 
-## 🚀 Overview
-This project simulates a real-world AI data analyst workflow using an interactive environment.
+This is a Meta OpenEnv compliant AI Data Analyst Agent that uses an LLM to automatically clean, process, and analyze datasets (NYC Taxi Dataset).
 
-The agent performs:
-- Data cleaning
-- Anomaly detection
-- Insight generation
+## Features
+- **Data Cleaning**: Automatically detects and handles missing values.
+- **Deduplication**: Identifies and removes duplicate records.
+- **Anomaly Detection**: Uses statistical methods (Isolation Forest) to detect outliers in fare amounts.
+- **Insight Generation**: Produces actionable business insights based on the cleaned data.
 
----
+## Tasks and Difficulty
+The environment defines a workflow task with increasing complexity based on the dataset state:
+- **Easy**: Handle missing values and duplicates.
+- **Medium**: Detect anomalies in cleaned data.
+- **Hard**: Generate comprehensive insights from a fully cleaned and anomaly-free dataset.
 
-## 🎯 Features
-- Real dataset (NYC Taxi)
-- Step-based environment (OpenEnv style)
-- Reward-driven agent system
-- Streamlit dashboard with visualizations
-- Anomaly detection using statistical methods
+## Baseline Performance
+Using `gpt-4.1-mini`:
+- Task: NYC Taxi Data Analysis Workflow
+- Sequence: `clean_missing` -> `remove_duplicates` -> `detect_anomaly` -> `generate_insight`
+- Success Rate: 100%
+- Average Steps: 4
+- Average Reward: 1.0 (0.25 per successful step)
 
----
+## Setup and Running
 
-## ⚙️ Tasks
+1. **Install dependencies**:
+   ```bash
+   uv venv
+   source .venv/bin/activate  # Or .venv\Scripts\activate on Windows
+   uv pip install -r requirements.txt
+   ```
 
-### 🟢 Task 1: Data Cleaning
-Remove missing values and duplicates
+2. **Set Environment Variables**:
+   ```bash
+   export API_BASE_URL="https://api.openai.com/v1"
+   export MODEL_NAME="gpt-4o-mini" # or whatever model you want
+   export HF_TOKEN="your_huggingface_token"
+   ```
 
-### 🟡 Task 2: Anomaly Detection
-Identify outliers in fare data
+3. **Run Inference**:
+   ```bash
+   python inference.py
+   ```
 
-### 🔴 Task 3: Insight Generation
-Generate meaningful business insights
+4. **Run Server (Locally)**:
+   ```bash
+   uvicorn server.app:app --host 0.0.0.0 --port 7860
+   ```
 
----
-
-## 🏆 Reward Design
-- Rewards for data cleaning improvements
-- Rewards for anomaly detection
-- Penalties for redundant actions
-- Final reward for completing task
-
----
-
-## 📊 Dataset
-NYC Taxi dataset (subset used for efficiency)
-
----
-
-## 🖥️ Run Locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
+## OpenEnv Validation
+This project is structured to pass Meta's pre-submission validators:
+- Proper `openenv.yaml` spec version 1
+- `server/app.py` with `main()` entrypoint
+- `inference.py` at root using OpenAI Client
+- Proper Dockerfile exposing port 7860
