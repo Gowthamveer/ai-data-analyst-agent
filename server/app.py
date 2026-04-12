@@ -41,13 +41,13 @@ def health():
 @app.post("/reset")
 def reset():
     obs = env.reset()
-    return {"obs": obs.dict()}
+    return {"observation": obs.dict()}
 
 
 @app.post("/step")
 def step(action: Action):
     obs, reward, done, info = env.step(action)
-    return {"obs": obs.dict(), "reward": reward, "done": done, "info": info}
+    return {"observation": obs.dict(), "reward": reward, "done": done, "info": info}
 
 
 @app.get("/state")
