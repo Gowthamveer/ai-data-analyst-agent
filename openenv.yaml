@@ -4,3 +4,19 @@ type: space
 runtime: fastapi
 app: server.app:app
 port: 7860
+tasks:
+  - id: "easy_task"
+    name: "Easy Task"
+    description: "Handle missing values and duplicates."
+    difficulty: "easy"
+    grader: "server.graders:grade_easy"
+  - id: "medium_task"
+    name: "Medium Task"
+    description: "Detect anomalies in cleaned data."
+    difficulty: "medium"
+    grader: "server.graders:grade_medium"
+  - id: "hard_task"
+    name: "Hard Task"
+    description: "Generate comprehensive insights from a fully cleaned and anomaly-free dataset."
+    difficulty: "hard"
+    grader: "server.graders:grade_hard"
