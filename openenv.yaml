@@ -1,23 +1,23 @@
-version: "1.0"
+spec_version: 1
 name: ai-data-analyst-env
-description: "AI Data Analyst environment for NYC Taxi data cleaning and analysis."
-type: space
+description: "AI Data Analyst environment for automated data processing."
+type: environment
 runtime: fastapi
 app: server.app:app
 port: 7860
 tasks:
-  - id: "easy_task"
-    name: "Easy Task"
+  - id: "task1"
+    name: "Data Cleaning Task"
     description: "Handle missing values and duplicates."
     difficulty: "easy"
-    grader: "tasks.easy_task.grader:grade"
-  - id: "medium_task"
-    name: "Medium Task"
-    description: "Detect anomalies in cleaned data."
+    grader: "server.graders:grade_task1"
+  - id: "task2"
+    name: "Anomaly Detection Task"
+    description: "Detect anomalies in NYC taxi fare data."
     difficulty: "medium"
-    grader: "tasks.medium_task.grader:grade"
-  - id: "hard_task"
-    name: "Hard Task"
-    description: "Generate comprehensive insights from a fully cleaned and anomaly-free dataset."
+    grader: "server.graders:grade_task2"
+  - id: "task3"
+    name: "Insight Generation Task"
+    description: "Produce business insights from cleaned data."
     difficulty: "hard"
-    grader: "tasks.hard_task.grader:grade"
+    grader: "server.graders:grade_task3"
